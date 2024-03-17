@@ -1,9 +1,21 @@
+'use client';
+
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { erc721Abi } from 'viem';
+import { useReadContract } from 'wagmi';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
+  const { data, status, error } = useReadContract({
+    abi: erc721Abi,
+    address: '0x03B8D129A8F6DC62a797b59aA5eeBB11Ad63DaDA',
+    functionName: 'totalSupply',
+  });
+
+  console.log({ data, status, error });
+
   return (
     <div className={styles.container}>
       <Head>
